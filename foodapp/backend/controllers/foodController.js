@@ -8,7 +8,7 @@ const addFood = async (req, res) => {
 
   const food = new foodModel({
     name: req.body.name,
-    debugger: req.body.description,
+    description: req.body.description,
     price: req.body.price,
     category: req.body.category,
     image: image_filename,
@@ -22,4 +22,15 @@ const addFood = async (req, res) => {
   }
 };
 
-export { addFood };
+//all food items
+const listFood = async (req, res) => {
+  try {
+    const foods = await foodModel.find({});
+    res.json({ success: true, data: foods });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Error" });
+  }
+};
+
+export { addFood, listFood };
